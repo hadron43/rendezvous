@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Fundraiser</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        @keyframes progress {
+            0% { background-position: 0 0; }
+            100% { background-position: 50px 50px; }
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+        }
+        h1, h2 {
+            text-align: center;
+            color: #4caf50;
+        }
+        .description {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 18px;
+            color: #666;
+        }
+        .progress-bar {
+            width: 100%;
+            background-color: #e0e0e0;
+            border-radius: 13px;
+            overflow: hidden;
+            margin-top: 20px;
+        }
+        .progress-bar-fill {
+            height: 20px;
+            background-color: #4caf50;
+            width: 0%;
+            animation: progress 2s ease-out forwards;
+            background: linear-gradient(-45deg, #4caf50, #8bc34a, #cddc39, #ffeb3b);
+            background-size: 200% 200%;
+        }
+        .donation-list {
+            margin-top: 20px;
+        }
+        .donation-item {
+            margin-bottom: 10px;
+            background-color: #f8f8f8;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .upi {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .qr-code {
+            max-width: 200px;
+            margin: 0 auto;
+        }
+        @media (max-width: 600px) {
+            .container {
+                width: 90%;
+            }
+            .qr-code {
+                max-width: 150px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1><i class="fas fa-hand-holding-usd"></i> Fundraiser</h1>
+        <p class="description">Hey there! We’re raising funds for our school get-together. Every little bit helps, and it’s all anonymous. Whether you’re a 🐘 Elephant or a 🐼 Panda, your contribution matters. So, let’s be secret superheroes and make this event happen. Remember, no act of kindness is too small. 😊</p>
+        <p><i class="fas fa-bullseye"></i> Target Amount: ₹<span id="targetAmount"></span></p>
+        <p><i class="fas fa-donate"></i> Donated: ₹<span id="donatedAmount"></span></p>
+        <div class="progress-bar">
+            <div class="progress-bar-fill" id="progressBar"></div>
+        </div>
+        <h2><i class="fas fa-gift"></i> Donations</h2>
+        <div class="donation-list" id="donationList"></div>
+        <div class="upi">
+            <h2><i class="fas fa-qrcode"></i> Donate with UPI</h2>
+            <p>UPI ID: 7982441536@paytm</p>
+            <img class="qr-code" src="qr-code.png" alt="QR Code">
+        </div>
+    </div>
+    <script>
+        var targetAmount = 20000; // Update this value as needed
+        var animalNames = ['🐘 Elephant', '🐯 Tiger', '🐧 Penguin', '🦒 Giraffe', '🦁 Lion', '🦓 Zebra', '🦛 Hippo', '🦘 Kangaroo', '🐨 Koala', '🐼 Panda', '🐻 Bear', '🐸 Frog', '🐵 Monkey', '🐔 Chicken', '🐦 Bird', '🐺 Wolf', '🦊 Fox', '🐴 Horse', '🦄 Unicorn', '🐝 Bee', '🐢 Turtle', '🦋 Butterfly', '🐌 Snail', '🐙 Octopus', '🦀 Crab', '🦉 Owl', '🦅 Eagle', '🦇 Bat', '🐊 Crocodile', '🐍 Snake'];
+        var donations = [
+            { amount: 0 },
+            // Add more donations here
+        ];
+
+        var donatedAmount = donations.reduce(function (total, donation) {
+            return total + donation.amount;
+        }, 0);
+
+        document.getElementById('targetAmount').textContent = targetAmount;
+        document.getElementById('donatedAmount').textContent = donatedAmount;
+        document.getElementById('progressBar').style.width = (donatedAmount / targetAmount * 100) + '%';
+
+        var donationList = document.getElementById('donationList');
+        donations.forEach(function (donation, index) {
+            var donationItem = document.createElement('div');
+            donationItem.classList.add('donation-item');
+            donationItem.textContent = animalNames[index % animalNames.length] + ': ₹' + donation.amount;
+            donationList.appendChild(donationItem);
+        });
+    </script>
+</body>
+</html>
