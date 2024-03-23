@@ -106,6 +106,9 @@
         </div>
         <h2><i class="fas fa-gift"></i> Donations</h2>
         <div class="donation-list" id="donationList"></div>
+
+        <h2><i class="fas fa-gift"></i> Expenses</h2>
+        <div class="expenses-list" id="expensesList"></div>
     </div>
     <script>
         var targetAmount = 20000; // Update this value as needed
@@ -136,6 +139,14 @@
             { amount: 2500 },
             // Add more donations here
         ];
+        var expenses = [
+            { amount: 15600, reason: "Catering and Venue - Merakii"},
+            { amount: 2100, reason: "Gifts for teachers + Party poppers"},
+            { amount: 1005, reason: "Refunded to 🦘 due to absentee"},
+            { amount: 336, reason: "Refundd to 🐸 (Top 3 Donors)"},
+            { amount: 447, reason: "Refundd to 🐘 (Top 3 Donors)"},
+            { amount: 559, reason: "Refundd to 🐌 (Top 3 Donors)"},
+        ]
 
         var donatedAmount = donations.reduce(function (total, donation) {
             return total + donation.amount;
@@ -152,6 +163,14 @@
             donationItem.classList.add('donation-item');
             donationItem.textContent = animalNames[index % animalNames.length] + ': ₹' + donation.amount;
             donationList.appendChild(donationItem);
+        });
+
+        var expensesList = document.getElementById('expensesList');
+        expenses.forEach(function (expense, index) {
+            var expenseItem = document.createElement('div');
+            expenseItem.classList.add('donation-item');
+            expenseItem.textContent = '₹' + expense.amount + ': ' + expense.reason;
+            expensesList.appendChild(expenseItem);
         });
     </script>
 </body>
