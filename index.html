@@ -31,6 +31,13 @@
             font-size: 18px;
             color: #666;
         }
+
+        .closed {
+            margin-bottom: 20px;
+            font-size: 18px;
+            color: red;
+        }
+
         .progress-bar {
             width: 100%;
             background-color: #e0e0e0;
@@ -94,6 +101,10 @@
         <p class="description">Hey there! We’re raising funds for our school get-together. Every little bit helps, and it’s all anonymous. Whether you’re an 🐘 Elephant or a 🐼 Panda, your contribution matters. So, let’s be secret superheroes and make this event happen. Remember, no act of kindness is too small. 😊</p>
         <p><i class="fas fa-bullseye"></i> Target Amount: ₹<span id="targetAmount"></span></p>
         <p><i class="fas fa-donate"></i> Donated: ₹<span id="donatedAmount"></span></p>
+        <p><i class="fas fa-cash-register"></i> Expenses: ₹<span id="expenseAmount"></span></p>
+
+        <p class="closed"><b>Update</b>: This fundraiser is now closed. A special thanks to all the donors for such overwhelming response! 😊</p>
+
         <div class="progress-bar">
             <div class="progress-bar-fill" id="progressBar">
             </div>
@@ -151,9 +162,13 @@
         var donatedAmount = donations.reduce(function (total, donation) {
             return total + donation.amount;
         }, 0);
+        var expenseAmount = expenses.reduce(function (total, expense) {
+            return total + expense.amount;
+        }, 0);
 
         document.getElementById('targetAmount').textContent = targetAmount;
         document.getElementById('donatedAmount').textContent = donatedAmount;
+        document.getElementById('expenseAmount').textContent = expenseAmount;
         document.getElementById('progressBar').style.width = (donatedAmount / targetAmount * 100) + '%';
         document.getElementsByClassName('progress-text')[0].textContent = Math.round(donatedAmount / targetAmount * 1000) / 10 + '%';
 
